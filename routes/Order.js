@@ -13,6 +13,18 @@ router.route('/list')
     }
   })
 
+  router.route('/history')
+  .get((req, res) => {
+    const body = req.body
+    const userId = body.userId
+    const result = orders.filter( order => (order.userId === userId))
+    if(result.length != 0){
+      res.json(result)
+    }else{
+      res.json({ message: "Dont have history" })
+    }
+  })  
+
 router.route('/:id')
   .get((req, res) => {
     const params = req.params
@@ -31,7 +43,7 @@ router.route('/create')
     const id = (orders.length == 0)?1:orders[orders.length - 1].id + 1
     let order = {
       id: id,
-      user: body.userId,
+      userId: body.userId,
       price: body.price,
       status: 0,
       createDate: date.toISOString()
