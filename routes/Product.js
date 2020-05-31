@@ -49,6 +49,19 @@ router.route('/update')
     if(!body.id){
       return res.json({ message: "Plase fill product id" })
     }
+
+    if(!body.name){
+      return res.json({ message: "Please fill your product's name" })
+    }
+
+    if(!body.price){
+      return res.json({ message: "Please fill your product's price" })
+    }
+
+    if(!body.code){
+      return res.json({ message: "Please fill your product's code" })
+    }
+    
     const id = body.id
     const index = products.findIndex( product => (product.id === +id))
     products[index].name = body.name
